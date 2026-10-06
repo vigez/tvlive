@@ -28,6 +28,36 @@ const OUT_JSON = path.join(DOCS, 'sources.json');
 const OUT_M3U = path.join(DOCS, 'sources.m3u');
 const OUT_STATS = path.join(DOCS, 'stats.json');
 
+// 本地化 hls.js 播放器：避免页面依赖境外 CDN（国内访问不稳定）
+const HLS_URLS = [
+  'https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js',
+  'https://unpkg.com/hls.js@1.5.13/dist/hls.min.js',
+];
+const OUT_HLS = path.join(DOCS, 'hls.min.js');
+
+/** 确保 docs/hls.min.js 存在；缺失时自动下载（带多镜像） */
+async function ensureHlsLib() {
+  if (fs.existsSync(OUT_HLS) && fs.statSync(OUT_HLS).size > 100000) {
+    console.log('   hls.min.js 已存在，跳过下载');
+    return true;
+  }
+  for (const u of HLS_URLS) {
+    try {
+      const res = await fetch(u, { redirect: 'follow' });
+      if (!res.ok) continue;
+      const txt = await res.text();
+      if (txt.length < 100000 || !txt.includes('Hls')) continue;
+      fs.writeFileSync(OUT_HLS, txt, 'utf8');
+      console.log(`   已下载 hls.min.js（${(txt.length / 1024).toFixed(0)} KB）`);
+      return true;
+    } catch {
+      /* 换下一个镜像 */
+    }
+  }
+  console.warn('   ⚠ hls.min.js 下载失败，页面将回退到 CDN 加载');
+  return false;
+}
+
 /** 读取旧数据（用于旧源兜底） */
 function loadPrevious() {
   try {
@@ -76,6 +106,10 @@ async function main() {
   console.log(' 方案2 静态构建 · 央视直播源');
   console.log(` 北京时间：${beijingTime()}`);
   console.log('==========================================');
+
+  // 0) 确保播放器脚本就位（本地化，去除境外 CDN 依赖）
+  console.log('\n[0/4] 检查播放器脚本...');
+  await ensureHlsLib();
 
   // 1) 抓取
   console.log('\n[1/4] 抓取源池...');

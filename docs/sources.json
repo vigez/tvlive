@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-10-06T10:01:47.019Z",
-  "updatedAtBeijing": "2026-10-06 18:01:47",
+  "updatedAt": "2026-10-06T10:15:10.255Z",
+  "updatedAtBeijing": "2026-10-06 18:15:10",
   "buildMode": "static-gh-pages",
   "schedule": {
     "cron": "0 5 * * *",
@@ -10,34 +10,34 @@
   "stats": {
     "poolCount": 5,
     "candidateCount": 166,
-    "aliveCount": 89,
-    "publishedCount": 83,
+    "aliveCount": 79,
+    "publishedCount": 76,
     "channelCovered": 18,
     "channelTotal": 18,
     "staleChannels": 0,
-    "durationMs": 36007
+    "durationMs": 93793
   },
   "pools": [
     {
       "name": "Guovin/TV",
       "ok": true,
       "parsed": 104,
-      "added": 100,
-      "via": "https://raw.githubusercontent.com/Guovin/TV/gd/output/result.m3u"
+      "added": 101,
+      "via": "https://cdn.jsdelivr.net/gh/Guovin/TV@gd/output/result.m3u"
     },
     {
       "name": "iptv-org",
       "ok": true,
       "parsed": 6,
-      "added": 4,
+      "added": 6,
       "via": "https://iptv-org.github.io/iptv/categories/general.m3u"
     },
     {
       "name": "vbskycn/iptv",
       "ok": true,
       "parsed": 17,
-      "added": 17,
-      "via": "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.m3u"
+      "added": 13,
+      "via": "https://cdn.jsdelivr.net/gh/vbskycn/iptv@master/tv/iptv4.m3u"
     },
     {
       "name": "YanG-1989/m3u",
@@ -50,7 +50,7 @@
       "name": "wwb521/live",
       "ok": true,
       "parsed": 46,
-      "added": 45,
+      "added": 46,
       "via": "https://raw.githubusercontent.com/wwb521/live/main/tv.m3u"
     }
   ],
@@ -62,27 +62,11 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://198.204.228.26/live/cctv1hd.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 517,
-          "stale": false
-        },
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv1.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 527,
-          "stale": false
-        },
-        {
           "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv1hd",
-          "width": 1280,
-          "height": 720,
+          "width": 1920,
+          "height": 1080,
           "codec": "h264",
-          "latencyMs": 940,
+          "latencyMs": 5608,
           "stale": false
         },
         {
@@ -90,7 +74,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1022,
+          "latencyMs": 2509,
           "stale": false
         },
         {
@@ -98,7 +82,23 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 2368,
+          "latencyMs": 3319,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv1hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3604,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv1.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 5890,
           "stale": false
         }
       ]
@@ -110,11 +110,27 @@
       "stale": false,
       "sources": [
         {
+          "url": "http://107.150.60.122/live/cctv2hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3554,
+          "stale": false
+        },
+        {
+          "url": "http://192.151.150.154/live/cctv2hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 5241,
+          "stale": false
+        },
+        {
           "url": "http://204.12.221.218:8181/3m1080p/cctv2.m3u8",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 514,
+          "latencyMs": 2555,
           "stale": false
         },
         {
@@ -122,23 +138,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 549,
-          "stale": false
-        },
-        {
-          "url": "http://107.150.60.122/live/cctv2hd.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 549,
-          "stale": false
-        },
-        {
-          "url": "http://192.151.150.154/live/cctv2hd.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 761,
+          "latencyMs": 3841,
           "stale": false
         },
         {
@@ -146,7 +146,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 952,
+          "latencyMs": 4133,
           "stale": false
         }
       ]
@@ -158,19 +158,19 @@
       "stale": false,
       "sources": [
         {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3719,
+          "stale": false
+        },
+        {
           "url": "http://107.150.60.122/live/cctv3hd.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 583,
-          "stale": false
-        },
-        {
-          "url": "http://69.30.245.50/live/cctv3.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1718,
+          "latencyMs": 4063,
           "stale": false
         },
         {
@@ -178,15 +178,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1041,
-          "stale": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 1143,
+          "latencyMs": 5957,
           "stale": false
         }
       ]
@@ -198,11 +190,11 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
+          "url": "http://107.150.60.122/live/cctv4hd.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1159,
+          "latencyMs": 3118,
           "stale": false
         },
         {
@@ -210,15 +202,15 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1201,
+          "latencyMs": 4581,
           "stale": false
         },
         {
-          "url": "http://107.150.60.122/live/cctv4hd.m3u8",
-          "width": 1280,
-          "height": 720,
+          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
+          "width": 1920,
+          "height": 1080,
           "codec": "h264",
-          "latencyMs": 352,
+          "latencyMs": 7446,
           "stale": false
         },
         {
@@ -226,7 +218,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1755,
+          "latencyMs": 2721,
           "stale": false
         },
         {
@@ -234,7 +226,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 2155,
+          "latencyMs": 5860,
           "stale": false
         }
       ]
@@ -246,27 +238,19 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv5p.m3u8?auth=testpub",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1617,
-          "stale": false
-        },
-        {
           "url": "http://173.208.212.130:8181/720p/cctv5.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 2346,
+          "latencyMs": 3788,
           "stale": false
         },
         {
-          "url": "http://107.150.60.122/live/cctv5hd.m3u8",
-          "width": 1280,
-          "height": 720,
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv5p.m3u8?auth=testpub",
+          "width": 1920,
+          "height": 1080,
           "codec": "h264",
-          "latencyMs": 261,
+          "latencyMs": 4103,
           "stale": false
         },
         {
@@ -274,7 +258,15 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1653,
+          "latencyMs": 3403,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv5hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4219,
           "stale": false
         }
       ]
@@ -286,19 +278,11 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://120.76.248.139/live/bfgd/4200000246.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 2566,
-          "stale": false
-        },
-        {
           "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv5p.m3u8?auth=test20251009",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 811,
+          "latencyMs": 6932,
           "stale": false
         }
       ]
@@ -310,19 +294,19 @@
       "stale": false,
       "sources": [
         {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3810,
+          "stale": false
+        },
+        {
           "url": "http://198.204.228.26/live/cctv6hd.m3u8",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 260,
-          "stale": false
-        },
-        {
-          "url": "http://69.30.245.50/live/cctv6.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 261,
+          "latencyMs": 3488,
           "stale": false
         },
         {
@@ -330,23 +314,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 278,
-          "stale": false
-        },
-        {
-          "url": "http://198.204.240.250:82/live/cctv6.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 322,
-          "stale": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 329,
+          "latencyMs": 4976,
           "stale": false
         }
       ]
@@ -362,23 +330,15 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 327,
+          "latencyMs": 3267,
           "stale": false
         },
         {
-          "url": "http://69.30.245.50/live/cctv7.m3u8",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1014,
-          "stale": false
-        },
-        {
-          "url": "http://207.56.13.146:81/cdnlive/cctv7.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 1582,
+          "latencyMs": 4168,
           "stale": false
         },
         {
@@ -386,15 +346,15 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1819,
+          "latencyMs": 4111,
           "stale": false
         },
         {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd",
+          "url": "http://207.56.13.146:81/cdnlive/cctv7.m3u8",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1863,
+          "latencyMs": 6537,
           "stale": false
         }
       ]
@@ -410,23 +370,15 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 407,
+          "latencyMs": 4114,
           "stale": false
         },
         {
-          "url": "http://69.30.245.50/live/cctv8.m3u8",
-          "width": 1280,
-          "height": 720,
+          "url": "http://124.165.251.82:85/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0",
+          "width": 1920,
+          "height": 1080,
           "codec": "h264",
-          "latencyMs": 243,
-          "stale": false
-        },
-        {
-          "url": "http://74.91.26.218:82/live/cctv8hd.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 525,
+          "latencyMs": 5484,
           "stale": false
         },
         {
@@ -434,7 +386,15 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 711,
+          "latencyMs": 4212,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv8hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4361,
           "stale": false
         },
         {
@@ -442,7 +402,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1600,
+          "latencyMs": 8816,
           "stale": false
         }
       ]
@@ -454,27 +414,27 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://198.204.228.26/live/cctv9hd.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1269,
-          "stale": false
-        },
-        {
           "url": "http://107.150.60.122/live/cctv9hd.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 2734,
+          "latencyMs": 3270,
           "stale": false
         },
         {
-          "url": "http://192.151.150.154/live/cctv9hd.m3u8",
-          "width": 1280,
-          "height": 720,
+          "url": "http://198.204.228.26/live/cctv9hd.m3u8",
+          "width": 1920,
+          "height": 1080,
           "codec": "h264",
-          "latencyMs": 307,
+          "latencyMs": 3815,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 6786,
           "stale": false
         },
         {
@@ -482,15 +442,15 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 313,
+          "latencyMs": 2583,
           "stale": false
         },
         {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd",
+          "url": "http://192.151.150.154/live/cctv9hd.m3u8",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 359,
+          "latencyMs": 5769,
           "stale": false
         }
       ]
@@ -502,11 +462,11 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://69.30.245.50/live/cctv10.m3u8",
+          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv10.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1321,
+          "latencyMs": 3460,
           "stale": false
         },
         {
@@ -514,23 +474,7 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1390,
-          "stale": false
-        },
-        {
-          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv10.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1761,
-          "stale": false
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv10hd.m3u8?auth=test20251009",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 823,
+          "latencyMs": 5574,
           "stale": false
         },
         {
@@ -538,7 +482,15 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1260,
+          "latencyMs": 2163,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv10hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4326,
           "stale": false
         }
       ]
@@ -554,15 +506,7 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1033,
-          "stale": false
-        },
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv11.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1056,
+          "latencyMs": 3158,
           "stale": false
         },
         {
@@ -570,7 +514,15 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1572,
+          "latencyMs": 3586,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv11.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 8884,
           "stale": false
         },
         {
@@ -578,7 +530,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 692,
+          "latencyMs": 3809,
           "stale": false
         },
         {
@@ -586,7 +538,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 790,
+          "latencyMs": 4713,
           "stale": false
         }
       ]
@@ -598,11 +550,11 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://107.150.60.122/live/cctv12hd.m3u8",
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv12hd.m3u8?auth=testpub",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 345,
+          "latencyMs": 3341,
           "stale": false
         },
         {
@@ -610,15 +562,23 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1331,
+          "latencyMs": 3906,
           "stale": false
         },
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv12hd.m3u8?auth=testpub",
+          "url": "http://124.165.251.82:85/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1526,
+          "latencyMs": 4223,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv12hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 8194,
           "stale": false
         },
         {
@@ -626,15 +586,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 271,
-          "stale": false
-        },
-        {
-          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv12hd.m3u8?auth=test20251009",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 2785,
+          "latencyMs": 2113,
           "stale": false
         }
       ]
@@ -646,27 +598,11 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv13.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 818,
-          "stale": false
-        },
-        {
-          "url": "http://120.76.248.139/live/bfgd/4200000067.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 2654,
-          "stale": false
-        },
-        {
           "url": "http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 3224,
+          "latencyMs": 213,
           "stale": false
         },
         {
@@ -674,7 +610,23 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 9278,
+          "latencyMs": 457,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3508,
+          "stale": false
+        },
+        {
+          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv13.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 5622,
           "stale": false
         },
         {
@@ -682,7 +634,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 265,
+          "latencyMs": 5156,
           "stale": false
         }
       ]
@@ -694,19 +646,35 @@
       "stale": false,
       "sources": [
         {
-          "url": "http://74.91.26.218:82/live/cctv14hd.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 312,
-          "stale": false
-        },
-        {
           "url": "https://event.pull.hebtv.com/jishi/cp2.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 6642,
+          "latencyMs": 456,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv14hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3141,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv14hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3630,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv14hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3313,
           "stale": false
         },
         {
@@ -714,23 +682,7 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 289,
-          "stale": false
-        },
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv14.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 306,
-          "stale": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv14hd",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 347,
+          "latencyMs": 3675,
           "stale": false
         }
       ]
@@ -746,23 +698,15 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 328,
+          "latencyMs": 2303,
           "stale": false
         },
         {
-          "url": "http://120.76.248.139/live/bfgd/4200000133.m3u8",
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv15hd",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 3052,
-          "stale": false
-        },
-        {
-          "url": "http://204.12.221.218:8181/3m1080p/cctv15.m3u8",
-          "width": 1280,
-          "height": 720,
-          "codec": "h264",
-          "latencyMs": 293,
+          "latencyMs": 5013,
           "stale": false
         },
         {
@@ -770,15 +714,23 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 306,
+          "latencyMs": 3196,
           "stale": false
         },
         {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv15hd",
+          "url": "http://204.12.221.218:8181/3m1080p/cctv15.m3u8",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 363,
+          "latencyMs": 3461,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv15hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3679,
           "stale": false
         }
       ]
@@ -794,15 +746,15 @@
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 1702,
+          "latencyMs": 2312,
           "stale": false
         },
         {
-          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv16hd.m3u8?auth=test20251009",
-          "width": 1280,
-          "height": 720,
+          "url": "http://gmxw.7766.org:808/hls/169/index.m3u8",
+          "width": 1920,
+          "height": 1080,
           "codec": "h264",
-          "latencyMs": 804,
+          "latencyMs": 7237,
           "stale": false
         },
         {
@@ -810,7 +762,15 @@
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 1933,
+          "latencyMs": 2001,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv16hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2362,
           "stale": false
         }
       ]
@@ -822,43 +782,27 @@
       "stale": false,
       "sources": [
         {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv17hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3068,
+          "stale": false
+        },
+        {
           "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
           "width": 1920,
           "height": 1080,
           "codec": "h264",
-          "latencyMs": 311,
+          "latencyMs": 3329,
           "stale": false
         },
         {
-          "url": "https://live.264788.xyz/channel/cctv17?streamid=f9c36f1e95b5b35eac89cc89583e7c0a&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1777,
-          "stale": false
-        },
-        {
-          "url": "https://live.264788.xyz/channel/cctv17?streamid=348c8c0c04a6d2b900e5a3bcb4af8ce1&livekey=01WgOR41rriMmMkzNsd0UoaxJRwetZdxIvtVk",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 1833,
-          "stale": false
-        },
-        {
-          "url": "http://120.76.248.139/live/bfgd/4200000204.m3u8",
-          "width": 1920,
-          "height": 1080,
-          "codec": "h264",
-          "latencyMs": 4365,
-          "stale": false
-        },
-        {
-          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv17hd",
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv17hd.m3u8?auth=test20251009",
           "width": 1280,
           "height": 720,
           "codec": "h264",
-          "latencyMs": 365,
+          "latencyMs": 2239,
           "stale": false
         }
       ]

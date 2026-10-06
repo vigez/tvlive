@@ -17,6 +17,13 @@
 > 两套方案**共用** `src/config.js`、`src/fetcher.js`、`src/validator.js`，配置一次即可。
 > 方案 2 相关文件：`.github/workflows/update.yml`、`scripts/build-static.mjs`、`docs/`。
 
+### 方案 2.5：Cloudflare Pages 加速 + 跨域代理（国内推荐）
+
+GitHub Pages 在国内不稳定，且**网页直连只能播 4/18 频道**（多数源不返回 CORS 头）。
+用 Cloudflare Pages 托管并启用内置的跨域代理后，**网页内可播频道提升到 10/18**。
+
+详见 **[`CLOUDFLARE-PAGES.md`](./CLOUDFLARE-PAGES.md)**。相关文件：`docs/functions/relay.js`、`docs/hls.min.js`。
+
 ---
 
 ## 方案 1 说明

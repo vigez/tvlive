@@ -6,7 +6,14 @@
 <title>央视直播源 · 每日自动更新</title>
 <link rel="stylesheet" href="./style.css" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>📺</text></svg>" />
-<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+<!-- hls.js 本地化：避免依赖境外 CDN（jsDelivr 在国内不稳定），页面零外部依赖 -->
+<!-- 若本地文件意外缺失，自动回退到 CDN，保证播放功能不中断 -->
+<script src="./hls.min.js"></script>
+<script>
+  if (!window.Hls) {
+    document.write('<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"><\/script>');
+  }
+</script>
 </head>
 <body>
 <header class="topbar">

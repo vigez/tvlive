@@ -6,6 +6,9 @@
 let DATA = null;
 let current = { channelId: null, lineIndex: 0 };
 let hls = null;
+// 是否具备服务端代理能力（Cloudflare Pages Functions）。
+// 有代理时可绕过直播源的跨域限制，网页内可播频道从 4/18 提升到接近全部。
+let RELAY_AVAILABLE = false;
 
 const $ = (s) => document.querySelector(s);
 const video = $('#video');
@@ -14,6 +17,28 @@ const grid = $('#grid');
 const lineSwitch = $('#line-switch');
 const nowPlaying = $('#now-playing');
 const corsHint = $('#cors-hint');
+
+/* ---------------- 探测代理能力 ---------------- */
+async function detectRelay() {
+  try {
+    const r = await fetch('./relay?url=' + encodeURIComponent('http://example.com/test.m3u8'), {
+      method: 'GET',
+    });
+    // 能收到任何 HTTP 响应（哪怕是 4xx/5xx）都说明 Function 存在
+    RELAY_AVAILABLE = r.status !== 404 && r.status !== 405;
+  } catch (_) {
+    RELAY_AVAILABLE = false;
+  }
+  if (RELAY_AVAILABLE) {
+    corsHint.textContent = '';
+  }
+}
+
+/** 把源地址包成走代理的地址 */
+function proxyUrl(u) {
+  if (!RELAY_AVAILABLE) return u;
+  return './relay?url=' + encodeURIComponent(u);
+}
 
 /* ---------------- 工具 ---------------- */
 function toast(msg) {
@@ -60,6 +85,9 @@ function renderStatus() {
     `更新方式：GitHub Actions 定时任务 · 每天 05:00（北京时间）` +
     (st.staleChannels ? ` · <span style="color:#ffcf5c">${st.staleChannels} 个频道沿用缓存源</span>` : '');
   $('#foot-updated').textContent = DATA.updatedAtBeijing || '—';
+  // 在统计区标注当前播放模式
+  const mode = RELAY_AVAILABLE ? '跨域代理已启用（网页内可播全部频道）' : '直连模式（仅部分源可在网页播放）';
+  $('#runtime-meta').innerHTML += `<br>播放模式：${mode}`;
 }
 
 function renderGrid() {
@@ -141,13 +169,15 @@ function playChannel(channelId, lineIndex) {
   corsHint.textContent = '';
 
   const url = src.url;
+  // 有代理则走代理（绕开跨域限制），否则直连
+  const playUrl = proxyUrl(url);
   overlay.textContent = `正在连接 ${ch.id} · 线路${lineIndex + 1}…`;
   overlay.classList.remove('hide');
   nowPlaying.textContent = `▶ ${ch.name} · 线路${lineIndex + 1}（${resLabel(src)}）`;
 
   if (window.Hls && window.Hls.isSupported()) {
     hls = new window.Hls({ lowLatencyMode: true, maxBufferLength: 20 });
-    hls.loadSource(url);
+    hls.loadSource(playUrl);
     hls.attachMedia(video);
     hls.on(window.Hls.Events.MANIFEST_PARSED, () => {
       overlay.classList.add('hide');
@@ -162,7 +192,7 @@ function playChannel(channelId, lineIndex) {
       }
     });
   } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = url;
+    video.src = playUrl;
     video.addEventListener('loadedmetadata', () => { overlay.classList.add('hide'); video.play().catch(() => {}); }, { once: true });
     video.addEventListener('error', () => tryNextLine(channelId, lineIndex), { once: true });
   } else {
@@ -183,13 +213,15 @@ function tryNextLine(channelId, fromIndex) {
   } else {
     overlay.textContent = `${ch.id} 所有线路均播放失败`;
     overlay.classList.remove('hide');
-    corsHint.textContent =
-      '提示：静态版页面无法代理跨域受限的源。建议下载 m3u 后用 PotPlayer / VLC / 电视盒子播放，体验更稳。';
+    corsHint.textContent = RELAY_AVAILABLE
+      ? '提示：所有线路当前均不可用，可稍后重试，或下载 m3u 用 PotPlayer / VLC 播放。'
+      : '提示：当前部署未启用跨域代理，网页只能播放少数源。建议下载 m3u 用 PotPlayer / VLC / 电视盒子播放。';
   }
 }
 
 /* ---------------- 数据加载 ---------------- */
 async function load() {
+  await detectRelay();
   try {
     const res = await fetch('./sources.json', { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
