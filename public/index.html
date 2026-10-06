@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>央视直播源 · 每日自动更新</title>
+<link rel="stylesheet" href="/style.css" />
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="dot"></span>
+    <h1>央视直播源</h1>
+    <span class="tag">每日 05:00 自动更新</span>
+  </div>
+  <div class="status" id="status">
+    <span class="chip" id="chip-updated">数据加载中…</span>
+    <span class="chip" id="chip-count">— 条可用源</span>
+    <span class="chip" id="chip-cover">— 频道</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <h2>只收录中央台，条条可播</h2>
+    <p>系统每天北京时间 <b>05:00</b> 自动从多个公开源池抓取央视直播源，逐条用 ffprobe 校验，只保留能正常播放的线路，并自动优选高清、低延迟源。</p>
+    <div class="actions">
+      <button class="btn primary" id="btn-download">下载全部源 (.m3u)</button>
+      <button class="btn" id="btn-copy">复制全部源</button>
+      <button class="btn ghost" id="btn-update">立即更新</button>
+    </div>
+    <div class="meta" id="runtime-meta"></div>
+  </div>
+  <div class="hero-player">
+    <div class="player-wrap">
+      <video id="video" controls playsinline poster=""></video>
+      <div class="player-overlay" id="player-overlay">选择一个频道开始播放</div>
+    </div>
+    <div class="now" id="now-playing">未选择频道</div>
+    <div class="lines" id="line-switch"></div>
+  </div>
+</section>
+
+<main>
+  <h3 class="section-title">频道列表 <span id="channel-hint"></span></h3>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <p>数据来源：多个公开 IPTV 源池（Guovin/TV、iptv-org 等），每日本机校验后聚合发布。</p>
+  <p class="warn">本页仅供学习与技术研究，所有直播源版权归原权利人所有，请勿用于商业用途。</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>

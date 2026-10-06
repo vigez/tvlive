@@ -1,0 +1,827 @@
+{
+  "updatedAt": "2026-10-06T09:05:16.189Z",
+  "updatedAtBeijing": "2026-10-06 17:05:16",
+  "buildMode": "static-gh-pages",
+  "schedule": {
+    "cron": "0 5 * * *",
+    "timeZone": "Asia/Shanghai",
+    "human": "每天北京时间 05:00"
+  },
+  "stats": {
+    "poolCount": 5,
+    "candidateCount": 166,
+    "aliveCount": 82,
+    "publishedCount": 78,
+    "channelCovered": 18,
+    "channelTotal": 18,
+    "staleChannels": 0,
+    "durationMs": 81738
+  },
+  "pools": [
+    {
+      "name": "Guovin/TV",
+      "ok": true,
+      "parsed": 104,
+      "added": 99,
+      "via": "https://cdn.jsdelivr.net/gh/Guovin/TV@gd/output/result.m3u"
+    },
+    {
+      "name": "iptv-org",
+      "ok": true,
+      "parsed": 6,
+      "added": 5,
+      "via": "https://iptv-org.github.io/iptv/categories/general.m3u"
+    },
+    {
+      "name": "vbskycn/iptv",
+      "ok": true,
+      "parsed": 17,
+      "added": 16,
+      "via": "https://raw.githubusercontent.com/vbskycn/iptv/master/tv/iptv4.m3u"
+    },
+    {
+      "name": "YanG-1989/m3u",
+      "ok": false,
+      "parsed": 0,
+      "added": 0,
+      "error": "解析结果为空"
+    },
+    {
+      "name": "wwb521/live",
+      "ok": true,
+      "parsed": 46,
+      "added": 46,
+      "via": "https://raw.githubusercontent.com/wwb521/live/main/tv.m3u"
+    }
+  ],
+  "channels": [
+    {
+      "id": "CCTV-1",
+      "name": "CCTV-1 综合",
+      "logo": "C1",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv1hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 1795,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv1.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2604,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv1hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2849,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv1hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3618,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv1hd",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4307,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-2",
+      "name": "CCTV-2 财经",
+      "logo": "C2",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://192.151.150.154/live/cctv2hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 4559,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv2hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2311,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv2.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2445,
+          "stale": false
+        },
+        {
+          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv2.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2777,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv2hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3615,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-3",
+      "name": "CCTV-3 综艺",
+      "logo": "C3",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://222.169.85.8:9901/tsfile/live/0003_1.m3u8?key=txiptv&playlive=1&authid=0$LR•IPV4『线路243』",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3063,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv3hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 6216,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv3hd",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3245,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv3hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3523,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-4",
+      "name": "CCTV-4 中文国际",
+      "logo": "C4",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://173.208.212.130:8181/1080p/cctv4.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3579,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv4k.m3u8?auth=testpub",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 4383,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv4hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2703,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv4hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3083,
+          "stale": false
+        },
+        {
+          "url": "http://207.56.13.146:81/cdnlive/cctv4.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3233,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-5",
+      "name": "CCTV-5 体育",
+      "logo": "C5",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://173.208.212.130:8181/720p/cctv5.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 2975,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv5p.m3u8?auth=testpub",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3156,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv5hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2496,
+          "stale": false
+        },
+        {
+          "url": "http://207.56.13.146:81/cdnlive/cctv5.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3264,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-5+",
+      "name": "CCTV-5+ 赛事",
+      "logo": "C5+",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://120.76.248.139/live/bfgd/4200000246.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 5285,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv5p.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2148,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-6",
+      "name": "CCTV-6 电影",
+      "logo": "C6",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://74.91.26.218:82/live/cctv6hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 2933,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv6hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2355,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv6hd",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2643,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-7",
+      "name": "CCTV-7 国防军事",
+      "logo": "C7",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://107.150.60.122/live/cctv7hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3295,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv7hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3922,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv7hd",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4361,
+          "stale": false
+        },
+        {
+          "url": "http://207.56.13.146:81/cdnlive/cctv7.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 5736,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-8",
+      "name": "CCTV-8 电视剧",
+      "logo": "C8",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://124.165.251.82:85/tsfile/live/0008_1.m3u8?key=txiptv&playlive=1&authid=0",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 665,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv8k",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3879,
+          "stale": false
+        },
+        {
+          "url": "http://207.56.13.146:81/cdnlive/cctv8.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2548,
+          "stale": false
+        },
+        {
+          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv8.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3098,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv8hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3328,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-9",
+      "name": "CCTV-9 纪录",
+      "logo": "C9",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv9hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3654,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv9hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3756,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv9hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2701,
+          "stale": false
+        },
+        {
+          "url": "http://192.151.150.154/live/cctv9hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3232,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv9hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4747,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-10",
+      "name": "CCTV-10 科教",
+      "logo": "C10",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv10.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3686,
+          "stale": false
+        },
+        {
+          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv10.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 4381,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv10hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3796,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv10hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4945,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-11",
+      "name": "CCTV-11 戏曲",
+      "logo": "C11",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://198.204.228.26/live/cctv11hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 2790,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv11hd.m3u8?auth=testpub",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 2941,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv11.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3998,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv11hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2648,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv11hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3304,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-12",
+      "name": "CCTV-12 社会与法",
+      "logo": "C12",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://124.165.251.82:85/tsfile/live/0012_1.m3u8?key=txiptv&playlive=1&authid=0",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 409,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv12hd.m3u8?auth=testpub",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3110,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv12.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3174,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv12hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2069,
+          "stale": false
+        },
+        {
+          "url": "http://107.150.60.122/live/cctv12hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2626,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-13",
+      "name": "CCTV-13 新闻",
+      "logo": "C13",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 211,
+          "stale": false
+        },
+        {
+          "url": "https://event.pull.hebtv.com/jishi/cp1.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 487,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv13hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3305,
+          "stale": false
+        },
+        {
+          "url": "http://bztv.tvbus.cc:8081/cdnlive/cctv13.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3338,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv13hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 4467,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-14",
+      "name": "CCTV-14 少儿",
+      "logo": "C14",
+      "stale": false,
+      "sources": [
+        {
+          "url": "https://event.pull.hebtv.com/jishi/cp2.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 437,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv14hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3058,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv14.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2829,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv14hd",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3965,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv14hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 4251,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-15",
+      "name": "CCTV-15 音乐",
+      "logo": "C15",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://120.76.248.139/live/bfgd/4200000133.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 470,
+          "stale": false
+        },
+        {
+          "url": "http://74.91.26.218:82/live/cctv15hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 4080,
+          "stale": false
+        },
+        {
+          "url": "http://198.204.228.26/live/cctv15hd.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2664,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv15hd",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3006,
+          "stale": false
+        },
+        {
+          "url": "http://204.12.221.218:8181/3m1080p/cctv15.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 3650,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-16",
+      "name": "CCTV-16 奥林匹克",
+      "logo": "C16",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://gmxw.7766.org:808/hls/169/index.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 2094,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqpub/cctv16hd.m3u8?auth=testpub",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3935,
+          "stale": false
+        },
+        {
+          "url": "http://207.56.13.146:81/cdnlive/cctv16.m3u8",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2007,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv16hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2405,
+          "stale": false
+        }
+      ]
+    },
+    {
+      "id": "CCTV-17",
+      "name": "CCTV-17 农业农村",
+      "logo": "C17",
+      "stale": false,
+      "sources": [
+        {
+          "url": "http://74.91.26.218:82/live/cctv17hd.m3u8",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3070,
+          "stale": false
+        },
+        {
+          "url": "http://63.141.230.178:82/gslb/zbdq5.m3u8?id=cctv17hd",
+          "width": 1920,
+          "height": 1080,
+          "codec": "h264",
+          "latencyMs": 3644,
+          "stale": false
+        },
+        {
+          "url": "http://38.75.136.137:98/gslb/dsdqbv/cctv17hd.m3u8?auth=test20251009",
+          "width": 1280,
+          "height": 720,
+          "codec": "h264",
+          "latencyMs": 2098,
+          "stale": false
+        }
+      ]
+    }
+  ]
+}

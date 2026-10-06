@@ -1,0 +1,18 @@
+{
+  "name": "cctv-live",
+  "version": "1.0.0",
+  "description": "中央台（CCTV）直播源自动更新网站：每天北京时间 05:00 自动抓取、校验并刷新可用直播源",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "update": "node src/updater.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["iptv", "cctv", "m3u", "hls", "live"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3"
+  }
+}
