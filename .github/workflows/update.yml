@@ -1,1 +1,62 @@
+name: 更新央视直播源
 
+# 定时：GitHub Actions 的 cron 使用 UTC 时区
+# 北京时间 05:00 == UTC 前一天 21:00
+# 注意：GitHub 免费 runner 在高峰期可能延迟几分钟到几十分钟，偶发跳过，属平台限制
+on:
+  schedule:
+    - cron: '0 21 * * *'
+  # 支持在 Actions 页面手动点击运行
+  workflow_dispatch:
+
+# 需要写权限，用于把更新后的静态文件提交回仓库
+permissions:
+  contents: write
+
+# 避免两次运行同时提交造成冲突
+concurrency:
+  group: cctv-live-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 ffmpeg（校验直播源可用性必需）
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          ffprobe -version | head -1
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 安装依赖
+        run: npm ci --omit=dev || npm install --omit=dev
+
+      - name: 抓取并校验直播源，产出静态文件
+        run: node scripts/build-static.mjs
+
+      - name: 提交更新结果回仓库
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 只提交数据文件，避免把构建产物之外的东西带上
+          git add docs/sources.json docs/sources.m3u docs/stats.json
+
+          if git diff --cached --quiet; then
+            echo "本次没有变化，跳过提交"
+          else
+            BEIJING=$(TZ=Asia/Shanghai date '+%Y-%m-%d %H:%M')
+            git commit -m "chore: 自动更新央视直播源 (${BEIJING} 北京时间)"
+            git push
+            echo "已提交并推送"
+          fi
