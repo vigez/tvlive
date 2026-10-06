@@ -50,7 +50,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
           # 只提交数据文件，避免把构建产物之外的东西带上
+          # hls.min.js 一并纳入：保证 CF Pages / 新克隆仓库里播放器脚本始终存在
           git add docs/sources.json docs/sources.m3u docs/stats.json
+          [ -f docs/hls.min.js ] && git add docs/hls.min.js
 
           if git diff --cached --quiet; then
             echo "本次没有变化，跳过提交"
