@@ -21,7 +21,8 @@ const ROOT = path.join(__dirname, '..');
 
 const CONFIG = require(path.join(ROOT, 'src', 'config.js'));
 const { fetchAllPools } = require(path.join(ROOT, 'src', 'fetcher.js'));
-const { validateAll } = require(path.join(ROOT, 'src', 'validator.js'));
+const { inspectAll } = require(path.join(ROOT, 'src', 'validator.js'));
+const { sortByQuality, scoreSource, qualityLabel } = require(path.join(ROOT, 'src', 'score.js'));
 
 const DOCS = path.join(ROOT, 'docs');
 const OUT_JSON = path.join(DOCS, 'sources.json');
@@ -76,19 +77,16 @@ function beijingTime(d = new Date()) {
   }).format(d).replace(/\//g, '-');
 }
 
-function scoreOf(s) {
-  return (s.width || 0) * (s.height || 0) - (s.latencyMs || 0);
-}
-
 function buildM3u(channels) {
   const lines = ['#EXTM3U x-tvg-url=""'];
   for (const ch of channels) {
     ch.sources.forEach((s, i) => {
       const label = i === 0 ? ch.id : `${ch.id}-线路${i + 1}`;
-      const res = s.height ? ` (${s.height}p)` : '';
+      // 线路名里带上「分辨率 · 实测带宽」，用户/播放器一眼能看出哪条快
+      const q = qualityLabel(s);
       lines.push(
         `#EXTINF:-1 tvg-id="${ch.id}" tvg-name="${ch.id}" tvg-logo="" ` +
-        `group-title="央视频道",${label}${res}`
+        `group-title="央视频道",${label} (${q})`
       );
       if (s.stale) lines.push('# 注意：本条为上次更新的缓存源');
       lines.push(s.url);
@@ -119,32 +117,65 @@ async function main() {
   );
   console.log(`   候选源合计：${total} 条`);
 
-  // 2) 校验
+  // 2) 校验 + 带宽实测
   const flat = [];
   for (const chId of Object.keys(candidates)) {
     for (const url of candidates[chId]) flat.push({ channel: chId, url });
   }
-  console.log(`\n[2/4] ffprobe 校验 ${flat.length} 条源（并发 ${CONFIG.probeConcurrency}）...`);
-  const validated = await validateAll(flat, (done, tot) => {
+  const bwOn = CONFIG.bandwidthOn !== false;
+  console.log(
+    `\n[2/4] 校验 ${flat.length} 条源（并发 ${CONFIG.probeConcurrency}）` +
+    `${bwOn ? ' + 实测带宽' : ''}...`
+  );
+  const validated = await inspectAll(flat, (done, tot) => {
     if (done % 30 === 0 || done === tot) console.log(`   进度 ${done}/${tot}`);
   });
   const alive = validated.filter((v) => v.ok);
   console.log(`   校验完成：可用 ${alive.length} / ${flat.length}`);
 
+  // 按带宽排序，让日志里能直接看到「最快的源长什么样」
+  const fastest = [...alive].filter((v) => v.kbps).sort((a, b) => b.kbps - a.kbps);
+  if (fastest.length) {
+    console.log(`   实测带宽：最高 ${(fastest[0].kbps / 1000).toFixed(1)} Mbps，` +
+      `中位 ${(fastest[Math.floor(fastest.length / 2)].kbps / 1000).toFixed(1)} Mbps，` +
+      `测不出 ${alive.length - fastest.length} 条`);
+  }
+
   // 3) 优选 + 兜底
-  console.log('\n[3/4] 按频道优选...');
+  console.log('\n[3/4] 按「带宽 + 分辨率」优选...');
   const channels = [];
   let covered = 0, staleUsed = 0;
 
   for (const meta of CONFIG.CHANNELS) {
-    const list = alive
-      .filter((v) => v.channel === meta.id)
-      .sort((a, b) => scoreOf(b) - scoreOf(a))
+    const ranked = sortByQuality(alive.filter((v) => v.channel === meta.id));
+    const list = ranked
       .slice(0, CONFIG.maxSourcesPerChannel)
-      .map((v) => ({
-        url: v.url, width: v.width, height: v.height,
-        codec: v.codec, latencyMs: v.latencyMs, stale: false,
-      }));
+      .map((v) => {
+        const sc = scoreSource(v);
+        return {
+          url: v.url,
+          width: v.width,
+          height: v.height,
+          codec: v.codec,
+          audioCodec: v.audioCodec || '',
+          hasAudio: v.hasAudio !== false,
+          latencyMs: v.latencyMs,
+          kbps: v.kbps || 0,
+          isIpv6: !!v.isIpv6,
+          score: sc.total,
+          grade: sc.grade,
+          stale: false,
+        };
+      });
+
+    if (list.length) {
+      const top = list[0];
+      console.log(
+        `   ${meta.id.padEnd(9)} ${String(list.length).padStart(2)} 条线路 · ` +
+        `首选 ${top.height}P / ${top.kbps ? (top.kbps / 1000).toFixed(1) + 'Mbps' : '速度未知'} ` +
+        `(评分 ${top.score}·${top.grade})`
+      );
+    }
 
     let stale = false;
     if (list.length === 0 && previous) {

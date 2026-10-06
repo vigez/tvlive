@@ -60,11 +60,44 @@ const SOURCE_POOLS = [
     url: 'https://raw.githubusercontent.com/wwb521/live/main/tv.m3u',
     mirrors: ['https://cdn.jsdelivr.net/gh/wwb521/live@main/tv.m3u'],
   },
+  // 以下池子实测能补到「境内直连 + 高带宽」的源，权重上是重点
+  {
+    name: 'iptv-org/CN',
+    url: 'https://iptv-org.github.io/iptv/countries/cn.m3u',
+    mirrors: ['https://raw.githubusercontent.com/iptv-org/iptv/master/countries/cn.m3u'],
+  },
+  {
+    name: 'Guovin/TV-ipv4',
+    url: 'https://raw.githubusercontent.com/Guovin/TV/gd/output/result_ipv4.m3u',
+    mirrors: ['https://cdn.jsdelivr.net/gh/Guovin/TV@gd/output/result_ipv4.m3u'],
+  },
+  {
+    name: 'Guovin/TV-ipv6',
+    url: 'https://raw.githubusercontent.com/Guovin/TV/gd/output/result_ipv6.m3u',
+    mirrors: ['https://cdn.jsdelivr.net/gh/Guovin/TV@gd/output/result_ipv6.m3u'],
+  },
+  {
+    name: 'fanmingming/live',
+    url: 'https://raw.githubusercontent.com/fanmingming/live/main/tv/m3u/ipv6.m3u',
+    mirrors: ['https://cdn.jsdelivr.net/gh/fanmingming/live@main/tv/m3u/ipv6.m3u'],
+  },
+  {
+    name: 'kimwang1978',
+    url: 'https://raw.githubusercontent.com/kimwang1978/collect-tv-txt/main/iptv4.m3u',
+    mirrors: ['https://cdn.jsdelivr.net/gh/kimwang1978/collect-tv-txt@main/iptv4.m3u'],
+  },
+  {
+    name: 'best-fan/iptv',
+    url: 'https://raw.githubusercontent.com/best-fan/iptv/main/CCTV.m3u',
+    mirrors: ['https://cdn.jsdelivr.net/gh/best-fan/iptv@main/CCTV.m3u'],
+  },
 ];
 
 const CONFIG = {
   CHANNELS,
   SOURCE_POOLS,
+
+  userAgent: 'CCTV-Live-Updater/2.0',
 
   // 抓取
   fetchTimeoutMs: 45000,
@@ -76,8 +109,39 @@ const CONFIG = {
   probeConcurrency: 30,
   probeRetries: 1,           // 失败后重试次数
 
+  // 带宽实测（新增）：连续拉若干分片，量真实下载速度
+  bandwidthSampleCount: 5,   // 最多连续拉几个分片
+  bandwidthBudgetMs: 6000,   // 单条源最多花多少毫秒做测速
+  bandwidthOn: true,         // 关掉可退回「只校验不测速」
+
   // 发布策略
   maxSourcesPerChannel: 5,   // 每频道最多保留多少条线路
+  maxIpv6PerChannel: 3,      // 每频道最多收录多少条 IPv6 源（本机测不了速，限量）
+
+  // 排序权重：真实带宽为主，分辨率次之
+  // 分档给分，避免为了快一点就牺牲清晰度，也避免高分低俗的源占首位
+  score: {
+    kbps: {
+      excellent: 8000,       // >= 8 Mbps  记 100 分  ← 境内广电 CDN 常在此档
+      good: 4000,            // >= 4 Mbps  记 80 分
+      fair: 2500,            // >= 2.5 Mbps 记 55 分 ← 1080p 直播的下限附近
+      poor: 1200,            // >= 1.2 Mbps 记 25 分
+      bad: 0,                // 其余        记 0 分
+    },
+    // 分辨率权重（0~60）
+    height: { h1080: 60, h720: 38, h576: 20, other: 8 },
+    // 起播延迟惩罚上限（毫秒），最多扣 15 分
+    latencyPenaltyMax: 15,
+    latencyPenaltyRefMs: 5000,
+    // 测不出带宽的源扣分（但不剔除）
+    noBandwidthPenalty: 20,
+    // 带宽低于 poor 档时的额外地板惩罚（这类源基本看不了）
+    belowFloorPenalty: 34,
+    // IPv6 运营商 IPTV 源的加分（本机测不了速，但对同网段电视极快）
+    ipv6UnverifiedFloor: 40,
+    // 无音轨扣分
+    noAudioPenalty: 18,
+  },
 
   // 定时：每天北京时间 05:00
   cronExpression: '0 5 * * *',

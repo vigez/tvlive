@@ -66,12 +66,35 @@ function fallbackCopy(text, done) {
   try { document.execCommand('copy'); done(); } catch (_) { toast('复制失败，请手动复制'); }
   document.body.removeChild(ta);
 }
+/** 带宽标签：把实测 kbps 渲染成人话，并按快慢着色 */
+function speedLabel(s) {
+  // IPv6 运营商源：本机测不了速，但在同运营商宽带下是内网级速度
+  if (s && s.ipv6Unverified) return { text: 'IPv6 运营商源', cls: 'v6' };
+  if (!s || !s.kbps) return { text: '速度未知', cls: 'slow' };
+  const m = s.kbps / 1000;
+  const text = m >= 1 ? m.toFixed(1) + ' Mbps' : s.kbps + ' kbps';
+  // 判定阈值与后端打分保持一致：>=2.5Mbps 才算够看 1080p
+  let cls = 'slow';
+  if (s.kbps >= 8000) cls = 'fast';
+  else if (s.kbps >= 2500) cls = 'ok';
+  return { text, cls };
+}
+
+/** 分辨率标签；IPv6 源本机探不到分辨率，不要显示「0P」 */
 function resLabel(s) {
   if (!s) return '未知';
+  if (s.ipv6Unverified) return 'IPv6 高清';
   if (s.height >= 1080) return '1080P 高清';
   if (s.height >= 720) return '720P 高清';
   if (s.height > 0) return s.height + 'P';
   return '标清/未知';
+}
+
+/** 线路质量徽标（列表 + 线路按钮共用） */
+function qualityBadge(s) {
+  const sp = speedLabel(s);
+  return `<span class="q-res">${resLabel(s)}</span>` +
+    `<span class="q-speed ${sp.cls}">${sp.text}</span>`;
 }
 
 /* ---------------- 渲染 ---------------- */
@@ -105,7 +128,8 @@ function renderGrid() {
     const badges = [];
     if (n > 0) {
       badges.push(`<span class="badge ok">${n} 条线路</span>`);
-      badges.push(`<span class="badge">${resLabel(best)}</span>`);
+      const sp = speedLabel(best);
+      badges.push(`<span class="badge">最佳 ${resLabel(best)} · <b class="${sp.cls}">${sp.text}</b></span>`);
     } else {
       badges.push(`<span class="badge bad">暂无可用源</span>`);
     }
@@ -144,8 +168,10 @@ function renderLines() {
   if (!ch || !ch.sources.length) return;
   ch.sources.forEach((s, i) => {
     const b = document.createElement('button');
+    const sp = speedLabel(s);
     b.className = 'line-btn' + (i === current.lineIndex ? ' active' : '');
-    b.textContent = `线路${i + 1} · ${resLabel(s)}`;
+    b.innerHTML = `线路${i + 1} · ${resLabel(s)}<br><small class="${sp.cls}">${sp.text}</small>`;
+    b.title = `${resLabel(s)} · ${sp.text}（实测）\n${s.url}`;
     b.addEventListener('click', () => playChannel(ch.id, i));
     lineSwitch.appendChild(b);
   });

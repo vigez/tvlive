@@ -10,6 +10,8 @@ function normalizeChannelName(raw) {
   let n = String(raw).toUpperCase();
   n = n.replace(/[（(][^）)]*[）)]/g, ' ');   // 去掉括号补充说明
   n = n.replace(/[\s_]+/g, '');              // 去掉空格和下划线
+  // 兼容 CCTV5+ / CCTV-5+ / CCTV5PLUS / CCTV5PUL 等写法
+  n = n.replace(/PLUS|PUL/g, '+');
   const m = n.match(/CCTV-?(\d{1,2})(\+)?/); // 同时兼容 CCTV1 / CCTV-1 / CCTV5+
   if (!m) return null;
   const id = 'CCTV-' + m[1] + (m[2] || '');
@@ -28,6 +30,22 @@ function channelNameFromExtinf(line) {
   return m ? m[1] : null;
 }
 
+/**
+ * 清理 URL：源池里常混入「备注文字」，例如
+ *   http://tvbox6.icu/tv/migu.php?id=cctv5p$LR•IPV4『线路72』
+ * 尾部的 `$LR•...` 是标注，不是 URL 的一部分，直接发给播放器会 404。
+ */
+function cleanUrl(raw) {
+  if (!raw) return null;
+  let u = String(raw).trim();
+  // 去掉 $ 及其后的备注（iptv 生态常见写法）
+  const dollar = u.indexOf('$');
+  if (dollar > 0) u = u.slice(0, dollar);
+  // 去掉全角/特殊标注
+  u = u.replace(/[$「」『』•]/g, '');
+  return u.trim();
+}
+
 /** 解析一份 m3u 文本，返回 [{channel, url}] */
 function parseM3u(text) {
   const out = [];
@@ -43,7 +61,8 @@ function parseM3u(text) {
       // 其他指令（如 #EXTVLCOPT）忽略，但保留 pending
     } else if (/^https?:\/\//i.test(line)) {
       const ch = normalizeChannelName(pending);
-      if (ch) out.push({ channel: ch, url: line });
+      const url = cleanUrl(line);
+      if (ch && url && /^https?:\/\//i.test(url)) out.push({ channel: ch, url });
       pending = null;
     }
   }
@@ -68,7 +87,20 @@ async function fetchText(url, timeoutMs) {
 }
 
 /**
+ * 判定 URL 是否为 IPv6 直连地址（形如 http://[2409:8087::1]/...）
+ * 注意：IPv6 域名（如 ipv6.xxx.com）不算 —— 那种本机同样能解析。
+ */
+function isIpv6Literal(url) {
+  return /^https?:\/\/\[/i.test(url || '');
+}
+
+/**
  * 抓取全部源池并聚合。
+ *
+ * 排序优先级：IPv4 源排在 IPv6 源之前。
+ * 原因：本机（多数构建机）没有 IPv6 出口，IPv6 源无法验证快慢。
+ * 若让 IPv6 源占据候选列表前部，会挤掉后面能实测的 IPv4 源。
+ *
  * @returns {Promise<{candidates: Object<string,string[]>, poolStats: Array}>}
  */
 async function fetchAllPools() {
@@ -85,15 +117,23 @@ async function fetchAllPools() {
         const items = parseM3u(text);
         if (items.length === 0) { lastErr = '解析结果为空'; continue; }
         let added = 0;
+        let addedV6 = 0;
         for (const it of items) {
           const list = candidates[it.channel];
-          if (list && !list.includes(it.url)) {
-            list.push(it.url);
-            added++;
+          if (!list) continue;
+          if (list.includes(it.url)) continue;
+          if (isIpv6Literal(it.url)) {
+            // IPv6 源限量收录：它们是「同运营商内网」的宝，但本机测不了速，
+            // 给太多会稀释榜单。每频道最多补 3 条。
+            const v6Count = list.filter(isIpv6Literal).length;
+            if (v6Count >= (CONFIG.maxIpv6PerChannel ?? 3)) continue;
+            addedV6++;
           }
+          list.push(it.url);
+          added++;
         }
         if (added === 0) { lastErr = '无新增央视源'; continue; }
-        return { name: pool.name, ok: true, parsed: items.length, added, via: u };
+        return { name: pool.name, ok: true, parsed: items.length, added, addedV6, via: u };
       } catch (e) {
         lastErr = String(e.message || e);
       }
@@ -104,8 +144,17 @@ async function fetchAllPools() {
   const results = await Promise.all(tasks);
   poolStats.push(...results);
 
+  // 关键：每个频道的候选里，IPv4 排前、IPv6 排后。
+  // 这样即使校验阶段有数量截断，被截掉的也是「验不了的 IPv6」而不是「能验的 IPv4」。
+  for (const chId of Object.keys(candidates)) {
+    const list = candidates[chId];
+    const v4 = list.filter((u) => !isIpv6Literal(u));
+    const v6 = list.filter(isIpv6Literal);
+    candidates[chId] = [...v4, ...v6];
+  }
+
   const total = Object.values(candidates).reduce((s, v) => s + v.length, 0);
   return { candidates, poolStats, total };
 }
 
-module.exports = { fetchAllPools, parseM3u, normalizeChannelName, fetchText };
+module.exports = { fetchAllPools, parseM3u, normalizeChannelName, cleanUrl, fetchText, isIpv6Literal };

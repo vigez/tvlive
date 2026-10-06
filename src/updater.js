@@ -7,7 +7,8 @@ const fs = require('fs');
 const path = require('path');
 const CONFIG = require('./config');
 const { fetchAllPools } = require('./fetcher');
-const { validateAll } = require('./validator');
+const { inspectAll } = require('./validator');
+const { sortByQuality, scoreSource, qualityLabel } = require('./score');
 
 function ensureDataDir() {
   fs.mkdirSync(CONFIG.paths.dataDir, { recursive: true });
@@ -21,13 +22,6 @@ function loadPrevious() {
   } catch (_) {
     return null;
   }
-}
-
-/** 分辨率评分：用于排序优选 */
-function scoreOf(s) {
-  const px = (s.width || 0) * (s.height || 0);
-  // 分辨率优先，其次延迟低优先
-  return px - (s.latencyMs || 0);
 }
 
 /** 北京时间字符串 */
@@ -47,10 +41,10 @@ function buildM3u(channels) {
     for (let i = 0; i < ch.sources.length; i++) {
       const s = ch.sources[i];
       const label = i === 0 ? ch.id : `${ch.id}-线路${i + 1}`;
-      const res = s.height ? `${s.height}p` : '';
+      // 线路名带上「分辨率 · 实测带宽」，用户一眼能看出哪条快
       lines.push(
         `#EXTINF:-1 tvg-id="${ch.id}" tvg-name="${ch.id}" ` +
-        `tvg-logo="" group-title="央视频道",${label}${res ? ' (' + res + ')' : ''}`
+        `tvg-logo="" group-title="央视频道",${label} (${qualityLabel(s)})`
       );
       if (s.stale) lines.push(`# 注意：本条为上次更新的缓存源`);
       lines.push(s.url);
@@ -82,8 +76,8 @@ async function runUpdate(opts = {}) {
   for (const chId of Object.keys(candidates)) {
     for (const url of candidates[chId]) flat.push({ channel: chId, url });
   }
-  log(`[2/4] 校验 ${flat.length} 条源（并发 ${CONFIG.probeConcurrency}）...`);
-  const validated = await validateAll(flat, (done, tot) => {
+  console.log(`[2/4] 校验 ${flat.length} 条源（并发 ${CONFIG.probeConcurrency}）+ 实测带宽...`);
+  const validated = await inspectAll(flat, (done, tot) => {
     if (done % 20 === 0 || done === tot) log(`      进度 ${done}/${tot}`);
   });
   const alive = validated.filter((v) => v.ok);
@@ -96,18 +90,26 @@ async function runUpdate(opts = {}) {
   let staleUsed = 0;
 
   for (const meta of CONFIG.CHANNELS) {
-    const list = alive
-      .filter((v) => v.channel === meta.id)
-      .sort((a, b) => scoreOf(b) - scoreOf(a))
+    const ranked = sortByQuality(alive.filter((v) => v.channel === meta.id));
+    const list = ranked
       .slice(0, CONFIG.maxSourcesPerChannel)
-      .map((v) => ({
-        url: v.url,
-        width: v.width,
-        height: v.height,
-        codec: v.codec,
-        latencyMs: v.latencyMs,
-        stale: false,
-      }));
+      .map((v) => {
+        const sc = scoreSource(v);
+        return {
+          url: v.url,
+          width: v.width,
+          height: v.height,
+          codec: v.codec,
+          audioCodec: v.audioCodec || '',
+          hasAudio: v.hasAudio !== false,
+          latencyMs: v.latencyMs,
+          kbps: v.kbps || 0,
+          isIpv6: !!v.isIpv6,
+          score: sc.total,
+          grade: sc.grade,
+          stale: false,
+        };
+      });
 
     let stale = false;
     if (list.length === 0 && previous) {
